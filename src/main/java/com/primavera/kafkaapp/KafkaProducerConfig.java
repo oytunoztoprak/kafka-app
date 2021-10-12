@@ -15,17 +15,15 @@ import java.util.Map;
 @Configuration
 public class KafkaProducerConfig {
 
-    //private static final String bootstrapAddress = "localhost:9092";
-
-    @Value("${bootstrapAddress}")
-    private String bootstrapAddress;
+    @Value("${billing.kafka.url}")
+    private String kafkaURL;
 
     @Bean
     public ProducerFactory<String, String> producerFactory() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(
                 ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
-                bootstrapAddress);
+                kafkaURL);
         configProps.put(
                 ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
                 StringSerializer.class);
